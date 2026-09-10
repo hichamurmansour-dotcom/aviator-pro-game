@@ -1,0 +1,259 @@
+/* ===== تنسيقات عامة ===== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* ===== حاوية اللعبة الرئيسية ===== */
+.game-container {
+    width: 90%;
+    max-width: 600px;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+/* ===== السجل التاريخي ===== */
+.history {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    margin-bottom: 12px;
+    padding: 5px 0;
+}
+
+.history-item {
+    background-color: #2a2a2a;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.history-item.win {
+    color: #28a745;
+}
+
+.history-item.loss {
+    color: #ff3333;
+}
+
+/* ===== شريط الإحصائيات ===== */
+.stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    background: #2a2a2a;
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+
+/* ===== شاشة اللعبة ===== */
+.screen {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-color: #0d0d0d;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #333;
+    margin-bottom: 20px;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* ===== عرض المضاعف ===== */
+.multiplier {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    transition: color 0.3s ease;
+}
+
+.multiplier.crashed {
+    color: #ff3333;
+    animation: pulse 0.5s ease-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* ===== عناصر التحكم ===== */
+.controls {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.input-group label {
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background-color: #2a2a2a;
+    color: #fff;
+    font-size: 1rem;
+    width: 110px;
+    text-align: center;
+    transition: border-color 0.2s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #e61c5d;
+}
+
+input:invalid {
+    border-color: #ff3333;
+}
+
+/* ===== الأزرار ===== */
+button {
+    padding: 12px 24px;
+    border-radius: 6px;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 18px;
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn-bet {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-bet:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.btn-cashout {
+    background-color: #ffc107;
+    color: black;
+}
+
+.btn-cashout:hover {
+    background-color: #ffb300;
+}
+
+.btn-reset {
+    background-color: #007bff;
+    color: white;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    margin-top: 0;
+}
+
+.btn-reset:hover {
+    background-color: #0056b3;
+}
+
+/* ===== السجل والرسائل ===== */
+.log {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #aaa;
+    min-height: 20px;
+    padding: 10px;
+    background-color: #2a2a2a;
+    border-radius: 6px;
+    transition: color 0.3s ease;
+}
+
+.log.success {
+    color: #28a745;
+}
+
+.log.error {
+    color: #ff3333;
+}
+
+/* ===== تجاوب الشاشات الصغيرة ===== */
+@media (max-width: 480px) {
+    .game-container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .screen {
+        height: 250px;
+    }
+
+    .multiplier {
+        font-size: 2rem;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .stats {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
